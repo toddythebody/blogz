@@ -1,0 +1,226 @@
+body {
+    background-color: gainsboro;
+}
+
+html *::selection {
+    background-color: darkred;
+    color: white;
+}
+
+h1 {
+  text-align: center;
+    color: white;
+    background-color: darkred;
+    width: 450px;
+    margin: auto;
+    font-size: 3.5em;
+    border: 10px double black;
+}
+
+h3 {
+    background-color: slategray;
+    position: relative;
+    height: 4em;
+    border: 2px solid black;
+}
+
+h3 a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    margin; 0 50%;
+}
+
+.mainPage {
+    display: inline-block;
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    background-color: darkred;
+    top: 0;
+    bottom: 0;
+    width: 40vw;
+    font-size: 3.3em;
+    max-width: 500px;
+    min-width: 350px;
+    padding-left: 5px;
+    border-right: 2px solid black;
+    transition: color .5s, background-color .5s;
+}
+
+.mainPage:hover {
+    background-color: indianred;
+    color: black;
+}
+
+.postPage {
+    position: absolute;
+    background-color: black;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 4px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    text-align: center;
+    font-size: 20px;
+    padding: 8px 2vw 0px 2vw;
+    transition: color .5s, background-color .5s;
+    border: 2px solid black;
+}
+
+.postPage:hover {
+    background-color: gainsboro;
+    color: black;
+}
+
+ul {
+    text-align: center;
+    background-color: slategray;
+    margin: 20px 10%;
+    border: 10px solid black;
+    border-radius: 20px;
+    list-style-type: none;
+}
+
+li h2 {
+    font-size: 2em;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+}
+
+li p {
+    font-size: 1.5em;
+    background-color: darkgray;
+    width: 70%;
+    margin: 10px auto 40px auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px 10px;
+    text-align: left;
+}
+
+li a {
+    text-decoration: none;
+    color: black;
+    background-color: dimgray;
+    border: 4px solid black;
+    border-radius: 10px;
+    padding: 10px 3px;
+    transition: background-color .5s;
+}
+
+li a:hover {
+    background-color: gainsboro;
+}
+
+#posted p {
+    text-align: left;
+    background-color: slategray;
+    margin: 20px 10%;
+    border: 10px solid black;
+    border-radius: 20px;
+    height: auto;
+    overflow: visible;
+    font-size: 4vh;
+    padding: 3% 100px;
+}
+
+form {
+    display: block;
+    text-align: center;
+    background-color: slategray;
+    margin: 20px 10%;
+    border: 10px solid black;
+    border-radius: 20px;
+    position: relative;
+}
+
+label {
+    display: inline;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+label[for="title"] {
+    position: relative;
+    left: calc(-25% + 30px);
+}
+
+#errName {
+  color: darkred;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 20px;
+  display: inline;
+  position: absolute;
+  left: calc(50% - 60px);
+  top: -17px;
+}
+
+#errBody {
+  color: darkred;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: normal;
+  display: inline;
+  position: absolute;
+  left: calc(50% - 60px);
+  top: 50px;
+}
+
+input[type="text"] {
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: auto;
+    font-size: 30px;
+    background-color: gainsboro;
+    outline: none;
+    border: 2px solid black;
+    transition: background-color .25s;
+    padding-left: 10px;
+}
+
+input[type="text"]:focus {
+    background-color: white;
+}
+
+label[for="body"] {
+    position: relative;
+    left: calc(-30% + 35px);
+}
+
+input[type="submit"] {
+    display: block;
+    font-size: 50px;
+    position: absolute;
+    left: calc(50% - 90px);
+    bottom: -90px;
+    border: 2px solid black;
+    background-color: slategray;
+    transition: background-color .25s;
+}
+
+input[type="submit"]:hover {
+    background-color: gainsboro;
+}
+
+textarea {
+    display: block;
+    resize: none;
+    margin: auto;
+    height: 34vh;
+    font-size: 30px;
+    background-color: gainsboro;
+    width: 60%;
+    margin-bottom: 10px;
+    outline: none;
+    border: 2px solid black;
+    transition: background-color .25s;
+    padding-left: 10px;
+}
+
+textarea:focus {
+    background-color: white;
+}

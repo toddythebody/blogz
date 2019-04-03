@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>What's on your mind?</h1>
+<form action="/posted" method="POST">
+  <label for="title">Title: </label>
+    <p id="errName">{{errName}}</p>
+    <input id="title" type="text" name="name" value="{{postName}}">
+  <label for="body">Entry:</label>
+    <p id="errBody">{{errBody}}</p>
+    <textarea id="body" name="body">{{postBody}}</textarea>
+  <input type="submit" value="Publish">
+</form>
+
+{% endblock %}
