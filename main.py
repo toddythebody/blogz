@@ -22,6 +22,14 @@ def index():
     blogPosts = Entry.query.all()
     return render_template('index.html', title="Living Diary", posts=blogPosts)
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
 @app.route('/entry')
 def entry():
     return render_template('entry.html', title="Make a Post")

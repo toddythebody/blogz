@@ -147,6 +147,16 @@ label[for="title"] {
     left: calc(-25% + 30px);
 }
 
+label[for="username"], label[for="password"] {
+  position: relative;
+  left: calc(-25% + 50px);
+}
+
+label[for="verify"] {
+  position: relative;
+  left: calc(-25% + 85px);
+}
+
 #errName {
   color: darkred;
   font-style: italic;
@@ -169,9 +179,9 @@ label[for="title"] {
   top: 50px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
     display: block;
-    margin: auto;
+    margin: auto auto 7px auto;
     width: 50%;
     height: auto;
     font-size: 30px;
@@ -182,7 +192,7 @@ input[type="text"] {
     padding-left: 10px;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus, input[type="password"]:focus {
     background-color: white;
 }
 
@@ -223,4 +233,13 @@ textarea {
 
 textarea:focus {
     background-color: white;
+}
+
+.registerLink {
+  text-decoration: none;
+  color: black;
+  position: relative;
+  float: right;
+  bottom: 20px;
+  right: 3px;
 }
