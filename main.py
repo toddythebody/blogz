@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, session, flash
 from flask_sqlalchemy import SQLAlchemy
+import re
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -12,22 +13,77 @@ class Entry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200))
     body = db.Column(db.String(2000))
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, name, body):
+    def __init__(self, name, body, owner):
         self.name = name
         self.body = body
+        self.owner = owner
+
+class User(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(31), unique=True)
+    password = db.Column(db.String(31))
+    post = db.relationship("Entry", backref="owner")
+
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+@app.before_request
+def require_login():
+    allowed_routes = ["login", "register"]
+    if request.endpoint not in allowed_routes and "username" not in session:
+        return redirect('/login')
 
 @app.route('/')
 def index():
     blogPosts = Entry.query.all()
     return render_template('index.html', title="Living Diary", posts=blogPosts)
 
-@app.route('/login')
+@app.route('/login', methods=['POST', 'GET'])
 def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        user = User.query.filter_by(username=username).first()
+        if user and user.password == password:
+            session['username'] = username
+            return redirect('/')
+        else:
+            flash("Incorrect login")
+            pass
     return render_template('login.html')
 
-@app.route('/register')
+@app.route('/register', methods=['POST', 'GET'])
 def register():
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['password']
+        verify = request.form['verify']
+        valid = True
+        validString = re.compile(r'^(?=\S{3,30}$)')
+        if not validString.match(username):
+            valid = False
+        if not validString.match(password):
+            valid = False
+        if password != verify:
+            flash("Passwords must match")
+            return redirect('/register')
+        if not valid:
+            flash("Characters(3-30), no spaces")
+            return redirect('/register')
+        existing_user = User.query.filter_by(username=username).first()
+        if not existing_user:
+            new_user = User(username, password)
+            db.session.add(new_user)
+            db.session.commit()
+            session['username'] = username
+            return redirect('/')
+        else:
+            flash(Name taken)
+            return redirect('/register')
     return render_template('register.html')
 
 @app.route('/entry')
