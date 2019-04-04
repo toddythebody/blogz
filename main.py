@@ -4,9 +4,10 @@ import re
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:build-a-blog@localhost:8889/build-a-blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:blogz@localhost:8889/blogz'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
+app.secret_key = "p64bdyS33spMgNMS"
 
 class Entry(db.Model):
 
@@ -39,6 +40,12 @@ def require_login():
 
 @app.route('/')
 def index():
+    owner = User.query.filter_by(username=session['username']).first()
+    blogPosts = Entry.query.filter_by(owner=owner).all()
+    return render_template('index.html', title="Living Diary", posts=blogPosts)
+
+@app.route('/all')
+def all():
     blogPosts = Entry.query.all()
     return render_template('index.html', title="Living Diary", posts=blogPosts)
 
@@ -53,7 +60,6 @@ def login():
             return redirect('/')
         else:
             flash("Incorrect login")
-            pass
     return render_template('login.html')
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -82,9 +88,14 @@ def register():
             session['username'] = username
             return redirect('/')
         else:
-            flash(Name taken)
+            flash("Name taken")
             return redirect('/register')
     return render_template('register.html')
+
+@app.route('/logout')
+def logout():
+    del session['username']
+    return redirect('/')
 
 @app.route('/entry')
 def entry():
@@ -104,7 +115,8 @@ def posted():
                 errBody = "Text Required"
             return render_template('entry.html', title="Make a Post",
                 postName=postName, postBody=postBody, errName=errName, errBody=errBody)
-        newPost = Entry(postName, postBody)
+        owner = User.query.filter_by(username=session['username']).first()
+        newPost = Entry(postName, postBody, owner)
         db.session.add(newPost)
         db.session.commit()
         postQuery = Entry.query.get(newPost.id)

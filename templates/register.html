@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Register</h1>
-<form>
+<form action="/register" method="POST">
   <label for="username">Username:</label>
     <input id="username" name="username" type="text" value="{{username}}">
   <label for="password">Password:</label>
