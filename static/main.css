@@ -121,6 +121,19 @@ li h2 {
     border-left: 2px solid black;
 }
 
+#author {
+  font-size: .5em;
+  font-style: italic;
+  position: absolute;
+  left: calc(15% + 20px);
+}
+
+#authorName {
+  color: darkred;
+  background-color: inherit;
+  border: inherit;
+}
+
 li p {
     font-size: 1.5em;
     background-color: darkgray;
