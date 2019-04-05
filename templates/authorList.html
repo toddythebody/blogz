@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Authors List</h1>
+<ul id="users">
+{% for author in authors|sort(attribute="owner.username") %}
+  <li>
+    <h2>
+      <span>
+        <a href="/author?id={{author.owner.username}}" id="userName">{{author.owner.username}}</a>
+      </span>
+  </h2>
+  </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

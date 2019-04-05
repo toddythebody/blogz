@@ -56,6 +56,11 @@ def author():
     blogPosts = Entry.query.filter_by(owner=owner).all()
     return render_template('index.html', title="Living Diary", posts=blogPosts)
 
+@app.route('/authorList')
+def authorList():
+    blogPosts = Entry.query.all()
+    return render_template('authorList.html', title="Living Diary", authors=blogPosts)
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
