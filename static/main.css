@@ -100,7 +100,7 @@ h3 a {
   background-color: gainsboro;
 }
 
-#logout {
+#authorList {
   color: gainsboro;
   position: absolute;
   font-style: italic;
@@ -110,6 +110,24 @@ h3 a {
   border: 2px solid darkred;
   padding-left: 10px;
   top: 4.1em;
+  transition: color .25s, background-color .25s;
+}
+
+#authorList:hover {
+  color: black;
+  background-color: gainsboro;
+}
+
+#logout {
+  color: gainsboro;
+  position: absolute;
+  font-style: italic;
+  background-color: black;
+  font-size: 1.5em;
+  width: 100px;
+  border: 2px solid darkred;
+  padding-left: 10px;
+  top: 5.43em;
   transition: color .25s, background-color .25s;
 }
 
