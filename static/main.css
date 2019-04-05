@@ -92,6 +92,12 @@ h3 a {
   border: 2px solid darkred;
   padding-left: 10px;
   top: 2.8em;
+  transition: color .25s, background-color .25s;
+}
+
+#all:hover {
+  color: black;
+  background-color: gainsboro;
 }
 
 #logout {
@@ -104,6 +110,12 @@ h3 a {
   border: 2px solid darkred;
   padding-left: 10px;
   top: 4.1em;
+  transition: color .25s, background-color .25s;
+}
+
+#logout:hover {
+  color: black;
+  background-color: gainsboro;
 }
 
 ul {

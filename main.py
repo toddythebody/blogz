@@ -115,11 +115,14 @@ def posted():
         postBody = request.form['body']
         errName = ''
         errBody = ''
-        if postName == '' or postBody == '':
+        validString = re.compile(r'^(?=.{,35}$)')
+        if postName == '' or postBody == '' or not validString.match(postName):
             if postName == '':
                 errName = "Text Required"
             if postBody == '':
                 errBody = "Text Required"
+            if not validString.match(postName):
+                errName = "Too Long"
             return render_template('entry.html', title="Make a Post",
                 postName=postName, postBody=postBody, errName=errName, errBody=errBody)
         owner = User.query.filter_by(username=session['username']).first()
