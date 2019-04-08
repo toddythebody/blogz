@@ -13,6 +13,7 @@
           by: <a href="/author?id={{post.owner.username}}" id="authorName">{{post.owner.username}}</a>
         </span>
       <a href="/posted?id={{post.id}}">{{post.name}}</a>
+      <span id="datetime">{{post.date_time}}</span>
     </h2>
       <p>{{post.body}}</p></li>
 {% endfor %}

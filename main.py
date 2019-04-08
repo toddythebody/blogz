@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, session, flash
 from flask_sqlalchemy import SQLAlchemy
 import re
+import datetime
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -15,11 +16,13 @@ class Entry(db.Model):
     name = db.Column(db.String(200))
     body = db.Column(db.String(2000))
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    date_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
-    def __init__(self, name, body, owner):
+    def __init__(self, name, body, owner, date_time):
         self.name = name
         self.body = body
         self.owner = owner
+        self.date_time = date_time
 
 class User(db.Model):
 
@@ -130,8 +133,9 @@ def posted():
                 errName = "Too Long"
             return render_template('entry.html', title="Make a Post",
                 postName=postName, postBody=postBody, errName=errName, errBody=errBody)
+        date_time = datetime.datetime.utcnow()
         owner = User.query.filter_by(username=session['username']).first()
-        newPost = Entry(postName, postBody, owner)
+        newPost = Entry(postName, postBody, owner, date_time)
         db.session.add(newPost)
         db.session.commit()
         postQuery = Entry.query.get(newPost.id)

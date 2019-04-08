@@ -158,6 +158,13 @@ li h2 {
   left: calc(15% + 20px);
 }
 
+#datetime {
+  font-size: .5em;
+  font-style: italic;
+  position: absolute;
+  right: 20%;
+}
+
 #authorName {
   color: darkred;
   background-color: inherit;
