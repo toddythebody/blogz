@@ -58,7 +58,7 @@ def author():
 
 @app.route('/authorList')
 def authorList():
-    blogPosts = Entry.query.all()
+    blogPosts = User.query.all()
     return render_template('authorList.html', title="Living Diary", authors=blogPosts)
 
 @app.route('/login', methods=['POST', 'GET'])
