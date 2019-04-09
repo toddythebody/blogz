@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, session, flash
 from flask_sqlalchemy import SQLAlchemy
 import re
 import datetime
+from pwhash import makeHash, checkHash
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -28,12 +29,12 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(31), unique=True)
-    password = db.Column(db.String(31))
+    password = db.Column(db.String(200))
     post = db.relationship("Entry", backref="owner")
 
     def __init__(self, username, password):
         self.username = username
-        self.password = password
+        self.password = makeHash(password)
 
 @app.before_request
 def require_login():
@@ -70,7 +71,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         user = User.query.filter_by(username=username).first()
-        if user and user.password == password:
+        if user and checkHash(password, user.password):
             session['username'] = username
             return redirect('/')
         else:
